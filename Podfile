@@ -9,4 +9,5 @@ target 'iOSExercise' do
 
   pod 'SDWebImage'
   pod 'SVProgressHUD'
+  pod 'RealmSwift'
 end

@@ -11,6 +11,7 @@ import SDWebImage
 import SVProgressHUD
 
 
+
 class ArticlesViewController: UIViewController {
 
     
@@ -30,6 +31,7 @@ class ArticlesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        SVProgressHUD.show()
         getJsonData()
         setUpBackView()
         setUpRefreshControl()
@@ -88,7 +90,7 @@ class ArticlesViewController: UIViewController {
         refreshControl.tintColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         refreshControl.backgroundColor = #colorLiteral(red: 0, green: 0.5882352941, blue: 1, alpha: 0.09942208904)
         
-        // Adding a target to execute a method
+        // Adding a target to execute a refreshData method
         refreshControl.addTarget(self, action: #selector(ArticlesViewController.refreshData), for: UIControlEvents.valueChanged)
         
         // Adding the refresh control to the tableView
@@ -107,8 +109,9 @@ class ArticlesViewController: UIViewController {
         
         // Calling getJsonData method
         getJsonData()
-        
-        // Refreshing
+        // Reloding the new data into the table
+        tableView.reloadData()
+        // Refreshing stop
         refreshControl.endRefreshing()
     }
     
@@ -120,7 +123,7 @@ class ArticlesViewController: UIViewController {
     /**************************************************************/
     fileprivate func getJsonData(){
         
-        SVProgressHUD.show()
+        
         //let dataURL = "https://no89n3nc7b.execute-api.ap-southeast-1.amazonaws.com/staging/exercise"
         let testURL = "https://api.myjson.com/bins/s8kd7"
         
@@ -133,6 +136,10 @@ class ArticlesViewController: UIViewController {
                 //let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
                 //print(jsonObject)
                 
+//                // RealM object
+//                let feedsToAdd = Feeds()
+                
+                
                 let result = try JSONDecoder().decode(Exercise.self, from: data)
                 
                 for jsonData in result.articles! {
@@ -143,6 +150,8 @@ class ArticlesViewController: UIViewController {
                     self.theDate.append(jsonData.date!)
                     self.theContent.append(jsonData.content!)
                     self.theImageUrl.append(jsonData.imageUrl!)
+                    
+//                    feedsToAdd.feedTitle2.append(jsonData.imageUrl!)
                 }
                 
                 DispatchQueue.main.async {
@@ -152,6 +161,15 @@ class ArticlesViewController: UIViewController {
                     self.tableView.reloadData()
                     SVProgressHUD.dismiss()
                 }
+                
+                
+//                print(result.exerciseTitle!)
+//
+//                feedsToAdd.feedTitle = result.exerciseTitle!
+//                feedsToAdd.feedTitle1 = result.exerciseTitle!
+//                feedsToAdd.writeToRealm()
+                
+                
                 
             } catch let jsonErr {
                 print("Error serializing json:", jsonErr)

@@ -17,6 +17,7 @@
 		E83636FA208DF79F00B3F358 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E83636F8208DF79F00B3F358 /* LaunchScreen.storyboard */; };
 		E8363709208DFB3400B3F358 /* ArticlesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8363708208DFB3400B3F358 /* ArticlesCell.swift */; };
 		E836370B208E11C200B3F358 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E836370A208E11C200B3F358 /* Exercise.swift */; };
+		E89C66AE208E96AD00DA3FBB /* RealmFeeds.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89C66AD208E96AD00DA3FBB /* RealmFeeds.swift */; };
 		E8FFB2A1208E6D2600782059 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FFB2A0208E6D2600782059 /* DetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		E83636FB208DF79F00B3F358 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8363708208DFB3400B3F358 /* ArticlesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesCell.swift; sourceTree = "<group>"; };
 		E836370A208E11C200B3F358 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
+		E89C66AD208E96AD00DA3FBB /* RealmFeeds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmFeeds.swift; sourceTree = "<group>"; };
 		E8FFB2A0208E6D2600782059 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,8 +75,8 @@
 			children = (
 				E83636EF208DF79D00B3F358 /* AppDelegate.swift */,
 				E8363706208DF8B800B3F358 /* Models */,
-				E8363707208DF8C100B3F358 /* Controllers */,
 				E8363705208DF8AE00B3F358 /* Views */,
+				E8363707208DF8C100B3F358 /* Controllers */,
 				E83636F6208DF79F00B3F358 /* Assets.xcassets */,
 				E83636FB208DF79F00B3F358 /* Info.plist */,
 			);
@@ -95,6 +97,7 @@
 			children = (
 				E836370A208E11C200B3F358 /* Exercise.swift */,
 				E8250679208E277C00A9B8E2 /* Articles.swift */,
+				E89C66AD208E96AD00DA3FBB /* RealmFeeds.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -203,11 +206,15 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-iOSExercise/Pods-iOSExercise-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
@@ -244,6 +251,7 @@
 				E83636F2208DF79D00B3F358 /* ArticlesViewController.swift in Sources */,
 				E825067A208E277C00A9B8E2 /* Articles.swift in Sources */,
 				E83636F0208DF79D00B3F358 /* AppDelegate.swift in Sources */,
+				E89C66AE208E96AD00DA3FBB /* RealmFeeds.swift in Sources */,
 				E836370B208E11C200B3F358 /* Exercise.swift in Sources */,
 				E8FFB2A1208E6D2600782059 /* DetailsViewController.swift in Sources */,
 				E8363709208DFB3400B3F358 /* ArticlesCell.swift in Sources */,
