@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import SVProgressHUD
+import RealmSwift
 
 
 
@@ -17,24 +18,24 @@ class ArticlesViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var theTitle = [String]()
-    var theWebsite = [String]()
-    var theAuthors = [String]()
-    var theDate = [String]()
-    var theContent = [String]()
-    var theImageUrl = [String]()
-    
     var refreshControl: UIRefreshControl = UIRefreshControl()
+    
+    let realm = try! Realm()
+    var titleFeeds: Results<RealmFeeds>!
+    var articlesFeeds: Results<RealmArticles>!
+    
     
     //MARK: - viewDidLoad
     /***************************************************************/
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fetchingData()
+        getDataAndStoreIt()
         SVProgressHUD.show()
-        getJsonData()
         setUpBackView()
         setUpRefreshControl()
+        
     }
     
     
@@ -47,7 +48,7 @@ class ArticlesViewController: UIViewController {
 
     
     
-    //MARK: - setUpTable
+    //MARK: - setUpTable method
     /***************************************************************/
     fileprivate func setUpTable(){
         // tableView delegate
@@ -62,27 +63,26 @@ class ArticlesViewController: UIViewController {
     
     
     
-    //MARK: - setUpView
+    //MARK: - setUpView method
     /***************************************************************/
     fileprivate func setUpBackView(){
         view.addVerticalGradientLayer(topColor: .white, bottomColor: #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 0.7466556079))
-        
     }
     
     
     
     
     
-    //MARk - setupNavBar
+    //MARk - setupNavBar method
     /**************************************************************/
-    fileprivate func setupNavBar(navTitle: String){
-        self.title = navTitle
+    fileprivate func setupNavBar(navtitle: String){
+        self.title = navtitle
     }
     
     
     
     
-    //MARk - setupNavBar()
+    //MARk - setupNavBar method
     /**************************************************************/
     fileprivate func setUpRefreshControl(){
         
@@ -98,17 +98,8 @@ class ArticlesViewController: UIViewController {
     }
     
     @objc func refreshData() {
-        
-        // Removing old data to not duplicate the same data
-        theTitle = []
-        theWebsite = []
-        theAuthors = []
-        theDate = []
-        theContent = []
-        theImageUrl = []
-        
         // Calling getJsonData method
-        getJsonData()
+        getDataAndStoreIt()
         // Reloding the new data into the table
         tableView.reloadData()
         // Refreshing stop
@@ -118,86 +109,122 @@ class ArticlesViewController: UIViewController {
     
     
     
-    
-    //MARK - getJsonData
-    /**************************************************************/
-    fileprivate func getJsonData(){
+    //MARK: - getDataAndStoreIt method
+    /***************************************************************/
+    fileprivate func getDataAndStoreIt(){
         
+        let dataURL = "https://no89n3nc7b.execute-api.ap-southeast-1.amazonaws.com/staging/exercise"
         
-        //let dataURL = "https://no89n3nc7b.execute-api.ap-southeast-1.amazonaws.com/staging/exercise"
-        let testURL = "https://api.myjson.com/bins/s8kd7"
+        // I created this like to test my app when there is more content
+        //let dataURL = "https://api.myjson.com/bins/s8kd7"
         
-        guard let url = URL(string: testURL) else {return}
-  
+        guard let url = URL(string: dataURL) else {return}
+        
         URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
             guard let data = data else {return}
             
             do {
-                //let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
-                //print(jsonObject)
-                
-//                // RealM object
-//                let feedsToAdd = Feeds()
-                
-                
-                let result = try JSONDecoder().decode(Exercise.self, from: data)
-                
-                for jsonData in result.articles! {
-                    self.theWebsite.append(jsonData.website!)
-                    self.theTitle.append(jsonData.articleTitle!)
-                    self.theWebsite.append(jsonData.website!)
-                    self.theAuthors.append(jsonData.authors!)
-                    self.theDate.append(jsonData.date!)
-                    self.theContent.append(jsonData.content!)
-                    self.theImageUrl.append(jsonData.imageUrl!)
-                    
-//                    feedsToAdd.feedTitle2.append(jsonData.imageUrl!)
-                }
+                let feeds = try JSONDecoder().decode(RealmFeeds.self, from: data)
                 
                 DispatchQueue.main.async {
-                    // calling setupNavBar to get the new navBar
-                    self.setupNavBar(navTitle: result.exerciseTitle!)
+                    try! self.realm.write {
+                        self.realm.add(feeds, update: true)
+                    }
+                    self.setupNavBar(navtitle: feeds.title)
                     // reloding the new content ..
                     self.tableView.reloadData()
                     SVProgressHUD.dismiss()
                 }
-                
-                
-//                print(result.exerciseTitle!)
-//
-//                feedsToAdd.feedTitle = result.exerciseTitle!
-//                feedsToAdd.feedTitle1 = result.exerciseTitle!
-//                feedsToAdd.writeToRealm()
-                
-                
-                
-            } catch let jsonErr {
-                print("Error serializing json:", jsonErr)
-            }
-        }.resume()
+            }catch let error {
+            print("Error serializing json:",error)
+        }
+      }.resume()
     }
     
+    
+    
+    
+    //MARK: - fetchingData method
+    /***************************************************************/
+    fileprivate func fetchingData(){
+        // Fetching data form our realm object
+        articlesFeeds = realm.objects(RealmArticles.self)
+        titleFeeds = realm.objects(RealmFeeds.self)
+    }
+    
+    
+    
+    
+    //MARK: - sort button
+    /***************************************************************/
+    @IBAction func sortButton(_ sender: Any) {
+        sort()
+    }
+    
+    
+    
+    
+    //MARK: - sort method
+    /***************************************************************/
+    fileprivate func sort(){
+        
+        // Creating multiple action Sheet to let the user choose what type of sort he want
+        let action = UIAlertController(title: "Sort News by :", message: nil, preferredStyle: .actionSheet)
+        
+        let cancel = UIAlertAction(title: "Cancel",style: .cancel, handler: nil)
+        
+        let date = UIAlertAction(title: "Date",style: .default) { action in
+            self.articlesFeeds = self.realm.objects(RealmArticles.self).sorted(byKeyPath: "date")
+            self.tableView.reloadData()
+        }
+        
+        let title = UIAlertAction(title: "Title",style: .default) { action in
+            self.articlesFeeds = self.realm.objects(RealmArticles.self).sorted(byKeyPath: "title")
+            self.tableView.reloadData()
+        }
+        
+        let author = UIAlertAction(title: "Author",style: .default) { action in
+            self.articlesFeeds = self.realm.objects(RealmArticles.self).sorted(byKeyPath: "authors")
+            self.tableView.reloadData()
+        }
+        
+        let random = UIAlertAction(title: "Random",style: .default) { action in
+            self.articlesFeeds = self.realm.objects(RealmArticles.self)
+            self.tableView.reloadData()
+        }
+        
+        action.addAction(date)
+        action.addAction(title)
+        action.addAction(author)
+        action.addAction(random)
+        action.addAction(cancel)
+        
+        present(action, animated: true, completion: nil)
 
+    }
     
     
     
+    
+    // Calling this method to show the data when the user choose any cell
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        let feed = articlesFeeds[(tableView.indexPathForSelectedRow?.row)!]
         
         if let destination = segue.destination as? DetailsViewController{
-            
-            destination.receivedArticalTitel = theTitle[(tableView.indexPathForSelectedRow?.row)!]
-            destination.receivedArticalContent = theContent[(tableView.indexPathForSelectedRow?.row)!]
-            destination.receivedArticalImageUrl = theImageUrl[(tableView.indexPathForSelectedRow?.row)!]
-            
+
+            destination.receivedArticalTitel = feed.title
+            destination.receivedArticalContent = feed.content
+            destination.receivedArticalImageUrl = feed.image_url
+
         }
     }
     
     
-    
-    
-    
-    
 }// class ends
+
+
 
 //MARK: - TableView Delegate Methods
 /***************************************************************/
@@ -219,20 +246,21 @@ extension ArticlesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return theTitle.count
+        return articlesFeeds.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "articleCell", for: indexPath) as! ArticlesCell
+        let feed = articlesFeeds[indexPath.row]
         
-        cell.titleText.text = theTitle[indexPath.row]
-        cell.desText.text = theContent[indexPath.row]
-        cell.articleWebsite.text = theWebsite[indexPath.row]
-        cell.articleAuthor.text = theAuthors[indexPath.row]
-        cell.articleDate.text = theDate[indexPath.row]
-        cell.articleImage.sd_setImage(with: URL(string: theImageUrl[indexPath.row]))
+        cell.titleText.text = feed.title
+        cell.desText.text = feed.content
+        cell.articleWebsite.text = feed.website
+        cell.articleAuthor.text = feed.authors
+        cell.articleDate.text = feed.date
+        cell.articleImage.sd_setImage(with: URL(string: feed.image_url))
 
         // Customizing the image
         cell.articleImage.clipsToBounds = true
@@ -244,14 +272,5 @@ extension ArticlesViewController: UITableViewDataSource {
     }
     
 } // extension ends
-
-
-
-
-
-
-
-
-
 
 

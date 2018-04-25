@@ -143,7 +143,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="siS-LO-Cu5"/>
+                    <navigationItem key="navigationItem" id="siS-LO-Cu5">
+                        <barButtonItem key="rightBarButtonItem" title="Sort By" id="YAd-6g-0ge">
+                            <connections>
+                                <action selector="sortButton:" destination="BYZ-38-t0r" id="43J-k7-a7O"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="BCn-qW-9J1" id="7sg-AF-5Pl"/>
                     </connections>

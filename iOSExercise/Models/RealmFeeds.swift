@@ -7,24 +7,50 @@
 //
 
 import Foundation
+import Realm
 import RealmSwift
 
-class Feeds: Object {
+class RealmFeeds: Object, Decodable {
     
-    @objc dynamic var feedTitle: String = ""
-    @objc dynamic var feedTitle1: String = ""
-    @objc dynamic var feedTitle2: String = ""
-    @objc dynamic var feedTitle3: String = ""
-    @objc dynamic var feedTitle4: String = ""
-    @objc dynamic var feedTitle5: String = ""
+    @objc dynamic var title: String = ""
+    var articles = List<RealmArticles>()
     
-}
-
-extension Feeds {
-    
-    func writeToRealm() {
-        try! uiRealm.write {
-            uiRealm.add(self)
-        }
+    override static func primaryKey() -> String? {
+        return "title"
     }
+    
+    private enum feedCodingKeys: String, CodingKey {
+        // Customizing key name
+        case title
+        case articles
+    }
+    
+    convenience init(title: String, articles: List<RealmArticles>){
+        self.init()
+        self.title = title
+        self.articles = articles
+    }
+    
+    convenience required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: feedCodingKeys.self)
+        let title = try container.decode(String.self, forKey: .title)
+        let articlesArray = try container.decode([RealmArticles].self, forKey: .articles)
+        let articlesList = List<RealmArticles>()
+        articlesList.append(objectsIn: articlesArray)
+        self.init(title: title, articles: articlesList)
+        
+    }
+    
+    required init() {
+        super.init()
+    }
+    
+    required init(value: Any, schema: RLMSchema) {
+        super.init(value: value, schema: schema)
+    }
+    
+    required init(realm: RLMRealm, schema: RLMObjectSchema) {
+        super.init(realm: realm, schema: schema)
+    }
+    
 }

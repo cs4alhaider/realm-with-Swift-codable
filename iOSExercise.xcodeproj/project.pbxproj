@@ -9,14 +9,13 @@
 /* Begin PBXBuildFile section */
 		208B17CE9A1588F352D87713 /* Pods_iOSExercise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 616E0D305693FDD7BF8A4226 /* Pods_iOSExercise.framework */; };
 		E807D8FD208E62580062A4F5 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E807D8FC208E62580062A4F5 /* Helper.swift */; };
-		E825067A208E277C00A9B8E2 /* Articles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8250679208E277C00A9B8E2 /* Articles.swift */; };
+		E8296E0B208FCC0E008873DF /* RealmArticles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8296E0A208FCC0D008873DF /* RealmArticles.swift */; };
 		E83636F0208DF79D00B3F358 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83636EF208DF79D00B3F358 /* AppDelegate.swift */; };
 		E83636F2208DF79D00B3F358 /* ArticlesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83636F1208DF79D00B3F358 /* ArticlesViewController.swift */; };
 		E83636F5208DF79D00B3F358 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E83636F3208DF79D00B3F358 /* Main.storyboard */; };
 		E83636F7208DF79F00B3F358 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E83636F6208DF79F00B3F358 /* Assets.xcassets */; };
 		E83636FA208DF79F00B3F358 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E83636F8208DF79F00B3F358 /* LaunchScreen.storyboard */; };
 		E8363709208DFB3400B3F358 /* ArticlesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8363708208DFB3400B3F358 /* ArticlesCell.swift */; };
-		E836370B208E11C200B3F358 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E836370A208E11C200B3F358 /* Exercise.swift */; };
 		E89C66AE208E96AD00DA3FBB /* RealmFeeds.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89C66AD208E96AD00DA3FBB /* RealmFeeds.swift */; };
 		E8FFB2A1208E6D2600782059 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FFB2A0208E6D2600782059 /* DetailsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -26,7 +25,7 @@
 		8383DD9CF8972F0C93E00845 /* Pods-iOSExercise.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSExercise.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSExercise/Pods-iOSExercise.release.xcconfig"; sourceTree = "<group>"; };
 		A32F6E69D5145134C2A9B19F /* Pods-iOSExercise.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSExercise.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSExercise/Pods-iOSExercise.debug.xcconfig"; sourceTree = "<group>"; };
 		E807D8FC208E62580062A4F5 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
-		E8250679208E277C00A9B8E2 /* Articles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Articles.swift; sourceTree = "<group>"; };
+		E8296E0A208FCC0D008873DF /* RealmArticles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmArticles.swift; sourceTree = "<group>"; };
 		E83636EC208DF79D00B3F358 /* iOSExercise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSExercise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E83636EF208DF79D00B3F358 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E83636F1208DF79D00B3F358 /* ArticlesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesViewController.swift; sourceTree = "<group>"; };
@@ -35,7 +34,6 @@
 		E83636F9208DF79F00B3F358 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E83636FB208DF79F00B3F358 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8363708208DFB3400B3F358 /* ArticlesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesCell.swift; sourceTree = "<group>"; };
-		E836370A208E11C200B3F358 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		E89C66AD208E96AD00DA3FBB /* RealmFeeds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmFeeds.swift; sourceTree = "<group>"; };
 		E8FFB2A0208E6D2600782059 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,9 +93,8 @@
 		E8363706208DF8B800B3F358 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E836370A208E11C200B3F358 /* Exercise.swift */,
-				E8250679208E277C00A9B8E2 /* Articles.swift */,
 				E89C66AD208E96AD00DA3FBB /* RealmFeeds.swift */,
+				E8296E0A208FCC0D008873DF /* RealmArticles.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -107,8 +104,8 @@
 			children = (
 				E83636F1208DF79D00B3F358 /* ArticlesViewController.swift */,
 				E8363708208DFB3400B3F358 /* ArticlesCell.swift */,
-				E807D8FC208E62580062A4F5 /* Helper.swift */,
 				E8FFB2A0208E6D2600782059 /* DetailsViewController.swift */,
+				E807D8FC208E62580062A4F5 /* Helper.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -249,10 +246,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E83636F2208DF79D00B3F358 /* ArticlesViewController.swift in Sources */,
-				E825067A208E277C00A9B8E2 /* Articles.swift in Sources */,
 				E83636F0208DF79D00B3F358 /* AppDelegate.swift in Sources */,
 				E89C66AE208E96AD00DA3FBB /* RealmFeeds.swift in Sources */,
-				E836370B208E11C200B3F358 /* Exercise.swift in Sources */,
+				E8296E0B208FCC0E008873DF /* RealmArticles.swift in Sources */,
 				E8FFB2A1208E6D2600782059 /* DetailsViewController.swift in Sources */,
 				E8363709208DFB3400B3F358 /* ArticlesCell.swift in Sources */,
 				E807D8FD208E62580062A4F5 /* Helper.swift in Sources */,
