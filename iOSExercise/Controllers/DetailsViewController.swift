@@ -17,12 +17,18 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var titelText: UITextView!
     @IBOutlet weak var desText: UITextView!
+    @IBOutlet weak var websiteLable: UILabel!
+    @IBOutlet weak var authorLable: UILabel!
+    @IBOutlet weak var dateLable: UILabel!
     
     
     // Creating variables to receive the data that coming from another viewController
     var receivedArticalTitel: String?
     var receivedArticalContent: String?
     var receivedArticalImageUrl: String?
+    var receivedArticalWebsite: String?
+    var receivedArticalAuthor: String?
+    var receivedArticalDate: String?
     
     
     
@@ -40,9 +46,13 @@ class DetailsViewController: UIViewController {
     // MARK - show
     /**************************************************************/
     fileprivate func show(){
+        self.title = receivedArticalTitel
         titelText.text = receivedArticalTitel
         desText.text = receivedArticalContent
         image.sd_setImage(with: URL(string: receivedArticalImageUrl!))
+        websiteLable.text = receivedArticalWebsite
+        authorLable.text = receivedArticalAuthor
+        dateLable.text = receivedArticalDate
     }
     
     
@@ -56,9 +66,6 @@ class DetailsViewController: UIViewController {
         imageHightConstraint.constant = screenSize.height * 0.25
     }
 
-    
-    
-    
     
     
 }// class end

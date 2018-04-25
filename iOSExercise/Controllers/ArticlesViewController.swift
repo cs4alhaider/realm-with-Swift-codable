@@ -217,6 +217,9 @@ class ArticlesViewController: UIViewController {
             destination.receivedArticalTitel = feed.title
             destination.receivedArticalContent = feed.content
             destination.receivedArticalImageUrl = feed.image_url
+            destination.receivedArticalWebsite = feed.website
+            destination.receivedArticalAuthor = feed.authors
+            destination.receivedArticalDate = feed.date
 
         }
     }
