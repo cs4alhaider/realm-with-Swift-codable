@@ -17,11 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
         // Printing the file location for the similiton and checking the data using RealM Browser App (From Mac AppStore)
         print(Realm.Configuration.defaultConfiguration.fileURL!)
-        
-        
         return true
     }
 

@@ -15,7 +15,7 @@ DEPENDENCIES:
   - SVProgressHUD
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Realm
     - RealmSwift
     - SDWebImage
@@ -29,4 +29,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 03896606f6c90e71754966e6ed4534784297f670
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.2

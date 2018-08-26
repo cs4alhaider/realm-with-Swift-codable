@@ -11,7 +11,6 @@ import UIKit
 
 extension UIView {
     
-    
     // Customizing the main view
     func addVerticalGradientLayer(topColor:UIColor, bottomColor:UIColor) {
         let gradient = CAGradientLayer()

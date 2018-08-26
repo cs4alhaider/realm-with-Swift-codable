@@ -11,16 +11,13 @@ import SDWebImage
 
 class DetailsViewController: UIViewController {
 
-    
     @IBOutlet weak var imageHightConstraint: NSLayoutConstraint!
-
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var titelText: UITextView!
     @IBOutlet weak var desText: UITextView!
     @IBOutlet weak var websiteLable: UILabel!
     @IBOutlet weak var authorLable: UILabel!
     @IBOutlet weak var dateLable: UILabel!
-    
     
     // Creating variables to receive the data that coming from another viewController
     var receivedArticalTitel: String?
@@ -31,17 +28,13 @@ class DetailsViewController: UIViewController {
     var receivedArticalDate: String?
     
     
-    
     // MARK - viewDidLoad
     /**************************************************************/
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         show()
         setUpImageHight()
     }
-
-
     
     // MARK - show
     /**************************************************************/
@@ -55,8 +48,6 @@ class DetailsViewController: UIViewController {
         dateLable.text = receivedArticalDate
     }
     
-    
-    
     // MARK - setUpImageHight
     /**************************************************************/
     fileprivate func setUpImageHight(){
@@ -65,7 +56,5 @@ class DetailsViewController: UIViewController {
         // Setting the constraint to a new value
         imageHightConstraint.constant = screenSize.height * 0.25
     }
-
-    
     
 }// class end

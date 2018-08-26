@@ -12,9 +12,7 @@ import SVProgressHUD
 import RealmSwift
 
 
-
 class ArticlesViewController: UIViewController {
-
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -29,15 +27,12 @@ class ArticlesViewController: UIViewController {
     /***************************************************************/
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         fetchingData()
         getDataAndStoreIt()
         SVProgressHUD.show()
         setUpBackView()
         setUpRefreshControl()
-        
     }
-    
     
     
     //MARK: - viewWillAppear
@@ -46,7 +41,6 @@ class ArticlesViewController: UIViewController {
         setUpTable()
     }
 
-    
     
     //MARK: - setUpTable method
     /***************************************************************/
@@ -61,8 +55,6 @@ class ArticlesViewController: UIViewController {
     }
     
     
-    
-    
     //MARK: - setUpView method
     /***************************************************************/
     fileprivate func setUpBackView(){
@@ -70,16 +62,11 @@ class ArticlesViewController: UIViewController {
     }
     
     
-    
-    
-    
     //MARk - setupNavBar method
     /**************************************************************/
     fileprivate func setupNavBar(navtitle: String){
         self.title = navtitle
     }
-    
-    
     
     
     //MARk - setupNavBar method
@@ -107,13 +94,11 @@ class ArticlesViewController: UIViewController {
     }
     
     
-    
-    
     //MARK: - getDataAndStoreIt method
     /***************************************************************/
     fileprivate func getDataAndStoreIt(){
         
-        let dataURL = "https://no89n3nc7b.execute-api.ap-southeast-1.amazonaws.com/staging/exercise"
+        let dataURL = "https://api.myjson.com/bins/1012mg"
         
         // I created this like to test my app when there is more content
         //let dataURL = "https://api.myjson.com/bins/s8kd7"
@@ -143,8 +128,6 @@ class ArticlesViewController: UIViewController {
     }
     
     
-    
-    
     //MARK: - fetchingData method
     /***************************************************************/
     fileprivate func fetchingData(){
@@ -154,15 +137,11 @@ class ArticlesViewController: UIViewController {
     }
     
     
-    
-    
     //MARK: - sort button
     /***************************************************************/
     @IBAction func sortButton(_ sender: Any) {
         sort()
     }
-    
-    
     
     
     //MARK: - sort method
@@ -201,10 +180,7 @@ class ArticlesViewController: UIViewController {
         action.addAction(cancel)
         
         present(action, animated: true, completion: nil)
-
     }
-    
-    
     
     
     // Calling this method to show the data when the user choose any cell
